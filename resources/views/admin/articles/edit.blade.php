@@ -13,7 +13,7 @@
         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-edit mr-2"></i>Edit Berita: {{ $article->title }}</h6>
     </div>
     <div class="card-body">
-        <form action="{{ route('articles.update', $article->id) }}" method="POST">
+        <form action="{{ route('articles.update', $article->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -43,6 +43,39 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                </div>
+            </div>
+
+            <!-- Upload File Image Edit -->
+            <div class="form-group">
+                <label for="image" class="font-weight-bold text-dark">Gambar Sampul Berita</label>
+
+                <!-- Menampilkan gambar lama -->
+                @if($article->image)
+                <div class="mb-2">
+                    <span class="d-block text-muted small">Gambar Sampul Saat Ini:</span>
+                    <img src="{{ asset('storage/' . $article->image) }}" class="img-thumbnail rounded" style="max-height: 150px;" alt="Sampul Berita">
+                </div>
+                @endif
+
+                <input type="file" class="form-control-file @error('image') is-invalid @enderror" id="image" name="image">
+                <small class="text-muted">Pilih file baru HANYA jika ingin mengganti gambar sampul saat ini. Maksimal 2MB.</small>
+                @error('image')
+                <div class="text-danger mt-1 small font-weight-bold">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- Checkbox Tags Edit -->
+            <div class="form-group">
+                <label class="font-weight-bold text-dark d-block">Pilih Tag/Label Berita</label>
+                <div class="row px-3">
+                    @foreach($tags as $tag)
+                    <div class="custom-control custom-checkbox mr-4 mb-2">
+                        <input type="checkbox" class="custom-control-input" id="tag-{{ $tag->id }}" name="tags[]" value="{{ $tag->id }}" 
+                            {{ in_array($tag->id, old('tags', $article->tags->pluck('id')->toArray())) ? 'checked' : '' }}>
+                        <label class="custom-control-label text-dark" for="tag-{{ $tag->id }}">{{ $tag->name }}</label>
+                    </div>
+                    @endforeach
                 </div>
             </div>
 

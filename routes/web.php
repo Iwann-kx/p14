@@ -16,6 +16,9 @@ Route::get('/tentang', function () {
     return view('user.tentang');
 });
 
+// Halaman detail berita publik
+Route::get('/berita/{slug}', [ArticleController::class, 'showPublic'])->name('berita.show');
+
 // Autentikasi bawaan Laravel UI
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -68,5 +71,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/admin/users', UserController::class);
     Route::resource('/admin/categories', CategoryController::class);
     Route::resource('/admin/articles', ArticleController::class);
+    Route::resource('/admin/tags', TagController::class);
+    Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/admin/profile', [ProfileController::class, 'update'])->name('profile.update');
+
 
 });
+
