@@ -64,8 +64,8 @@
                 <div id="collapseUsers" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">User Management:</h6>
-                        <a class="collapse-item" href="{{ route('admin.users.index') }}">List Users</a>
-                        <a class="collapse-item" href="{{ route('admin.users.create') }}">Add User</a>
+                        <a class="collapse-item" href="{{ route('users.index') }}">List Users</a>
+                        <a class="collapse-item" href="{{ route('users.create') }}">Add User</a>
                         <a class="collapse-item" href="{{ route('admin.users.roles') }}">Manage Roles</a>
                     </div>
                 </div>
@@ -82,7 +82,22 @@
                         <h6 class="collapse-header">Product Management:</h6>
                         <a class="collapse-item" href="{{ route('admin.products.index') }}">All Products</a>
                         <a class="collapse-item" href="{{ route('admin.products.create') }}">Add Product</a>
-                        <a class="collapse-item" href="{{ route('admin.products.categories') }}">Categories</a>
+                        <a class="collapse-item" href="{{ route('categories.index') }}">Categories</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- News Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNews">
+                    <i class="fas fa-fw fa-newspaper"></i>
+                    <span>Berita</span>
+                </a>
+                <div id="collapseNews" class="collapse" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">News Management:</h6>
+                        <a class="collapse-item" href="{{ route('articles.index') }}">Semua Berita</a>
+                        <a class="collapse-item" href="{{ route('articles.create') }}">Tambah Berita</a>
                     </div>
                 </div>
             </li>

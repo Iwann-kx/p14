@@ -1,11 +1,18 @@
 <?php
 
+use App\Models\Article;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     // Dashboard
     Route::get('/dashboard', function () {
-        return view('admin.dashboard');
+        $userCount = User::count();
+        $categoryCount = Category::count();
+        $articleCount = Article::count();
+
+        return view('admin.dashboard', compact('userCount', 'categoryCount', 'articleCount'));
     })->name('dashboard');
 
     // Users Routes
